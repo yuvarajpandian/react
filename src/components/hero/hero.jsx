@@ -4,7 +4,7 @@ import {AiOutlineArrowDown} from 'react-icons/ai'
 import manEating from '../../assets/man-having-his-meal.svg'
 const hero = () => {
   return (
-    <section style={{height: '200vh'}} id="home" className={classes.container}>
+    <section style={{height: '150vh'}} id="home" className={classes.container}>
     <div className={classes.wrapper}>
       <div className={classes.left}>
         <h2 className={classes.title}>Do you crave delicious food</h2>
