@@ -1,6 +1,6 @@
 
 import './App.css';
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, Navigate} from 'react-router-dom'
 import Home from './components/home/home';
 import Login from './components/login/login';
 import Signup from './components/signUp/signUp';
@@ -11,12 +11,20 @@ import FoodCatalog from './components/foodCatalog/foodCatalog';
 import Create from './components/create/create';
 import Navbar from './components/navBar/navBar';
 import Footer from './components/footer/footer';
+// import { useEffect } from 'react';
 function App() {
+
+  // let navigate = useNavigate()
+  // useEffect(()=>{
+  //   console.log("in app");
+  //   // navigate("/login")
+  // },[])
   return (
     <div>
       <Navbar />
        <Routes>
-         <Route path='/' element={<Home />} />
+         <Route path='/' element={<Navigate to="/home" />} />
+         <Route path='/home' element={<Home />} />
          <Route path='/login' element={<Login />} />
          <Route path='/signup' element={<Signup />} />
          <Route path='/create' element={<Create />} />

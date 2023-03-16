@@ -1,14 +1,29 @@
 import React from "react";
 import classes from "./navBar.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineUser, AiOutlineShoppingCart } from "react-icons/ai";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../redux/authSlice";
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
+
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  function navigateToLogin() {
+    navigate("/login");
+  }
+  function Logout() {
+    dispatch(logout());
+    navigate("/home");
+  }
   return (
     <div className={`${classes.container} ${isScrolled && classes.scrolled}`}>
       <div className={classes.wrapper}>
@@ -20,19 +35,19 @@ const NavBar = () => {
         <div className={classes.center}>
           <ul className={classes.list}>
             <li className={classes.listItem}>
-              <Link to ="/">Home</Link>
+              <Link to="/home">Home</Link>
             </li>
             <li className={classes.listItem}>
-              <Link to="/#contacts">Contacts</Link>
+              <Link to="/home#contacts">Contacts</Link>
             </li>
             <li className={classes.listItem}>
-              <Link to="/#foods">Foods</Link>
+              <Link to="/home#foods">Foods</Link>
             </li>
             <li className={classes.listItem}>
-              <Link to="/#faq">FAQ</Link>
+              <Link to="/home#faq">FAQ</Link>
             </li>
             <li className={classes.listItem}>
-              <Link to="/create">Create</Link>
+              <Link to="/home#create">Create</Link>
             </li>
           </ul>
         </div>
@@ -42,7 +57,9 @@ const NavBar = () => {
             <AiOutlineShoppingCart className={classes.cartIcon} />
             <div className={classes.cartQuantity}>0</div>
           </Link>
-          <button className={classes.logout}>Logout</button>
+          <button className={classes.logout} onClick={isLoggedIn?Logout:navigateToLogin}>
+            {isLoggedIn ? "Logout" : "Login"}
+          </button>
         </div>
       </div>
     </div>

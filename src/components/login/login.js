@@ -28,18 +28,21 @@ const Login = () => {
 
       // const data = await res.json();
       // console.log(data);
-      const data = {name:"yuvaraj" , token:"2121"}
-      dispatch(login({data})); // {userInfo, token}
+      
+  // {userInfo, token}
       // navigate("/");
-
+      
       if (email === "1235@gmail.com" && password === "123") {
+      
         navigate("/");
+        const data = {username:email, token:password}
+        dispatch(login(data)); 
       }
     } catch (error) {
-      setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 3000);
+      // setError(true);
+      // setTimeout(() => {
+      //   setError(false);
+      // }, 3000);
     }
   };
   return (
